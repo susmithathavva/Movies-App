@@ -1,0 +1,13 @@
+<suite name="linktestmocks" parallel="classes" thread-count="5">
+    <test name="movieapp">
+        <classes>
+            <class name="AccountPageTest"/>
+            <class name="HeaderSectionTest"/>
+            <class name="HomePageTest"/>
+            <class name="loginpageTest"/>
+            <class name="MovieDetailsPageTest"/>
+            <class name="PopularPageTest"/>
+            <class name="SearchPageTest"/>
+        </classes>
+    </test>
+</suite>
