@@ -1,0 +1,97 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.PopularPage;
+import org.openqa.selenium.WebElement;
+import pages.*;
+import java.util.List;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeMethod;
+import java.time.Duration;
+
+public class MovieDetailsPageTest {
+    WebDriver driver;
+    SearchPageTest SearchPage;
+    loginpage loginpage;
+    HomePage homepage;
+    PopularPage popularPage;
+    MovieDetailsPage movieDetailsPage;
+
+    @BeforeMethod
+    public void setup() {
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\HP\\AppData\\Local\\Temp\\db1d160d-9511-41be-a6e5-bc155777136c_chromedriver-win32 (3).zip.36c\\chromedriver-win32\\chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.get("https://qamoviesapp.ccbp.tech/login");
+        SearchPage = new SearchPageTest();
+        homepage = new HomePage(driver);
+        loginpage = new loginpage(driver);
+        popularPage = new PopularPage(driver);
+        movieDetailsPage = new MovieDetailsPage(driver);
+        loginpage.loginToApplication("rahul", "rahul@2021");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.urlToBe("https://qamoviesapp.ccbp.tech/"));
+    }
+
+    @Test
+    public void MovieDetailsPage() {
+        // List<WebElement> movie=movieDetailsPage.getheading();
+        //for(WebElement movies:movie ){
+        //  System.out.println(movies.getText());
+        //}
+        // Assert.assertEquals(movieDetailsPage.getheading1(),"No Time to Die");
+        movieDetailsPage.getheading1();
+        String actualTest = movieDetailsPage.gettitle();
+        String Expected = "No Time to Die";
+        Assert.assertEquals(actualTest, Expected, "Titile not match");
+        String Actual = movieDetailsPage.getoverview();
+        String expected = "Bond has left active service and is enjoying a tranquil life in Jamaica. His peace is short-lived when his old friend Felix Leiter from the CIA turns up asking for help. The mission to rescue a kidnapped scientist turns out to be far more treacherous than expected, leading Bond onto the trail of a mysterious villain armed with dangerous new technology.";
+        Assert.assertEquals(Actual, expected, "Bond has left active service and is enjoying a tranquil life in Jamaica. His peace is short-lived when his old friend Felix Leiter from the CIA turns up asking for help. The mission to rescue a kidnapped scientist turns out to be far more treacherous than expected, leading Bond onto the trail of a mysterious villain armed with dangerous new technology.");
+
+        String actuals = movieDetailsPage.getwatchtime();
+        String expectedd = "2h 43m";
+        Assert.assertEquals(actuals, expectedd, "2h 43m");
+
+        String Actualsensor = movieDetailsPage.getsensorrating();
+        String expectedsensor = "U/A";
+        Assert.assertEquals(Actualsensor, expectedsensor, "U/A");
+
+        String ActualYear = movieDetailsPage.getreleseyear();
+        String expectedYear = "2021";
+        Assert.assertEquals(ActualYear, expectedYear, "2021");
+
+        movieDetailsPage.getplaybutton();
+    }
+
+    @Test(priority = 1)
+    public void popularDetailsPage() {
+        //movieDetailsPage.getpopular();
+        popularPage.button();
+        movieDetailsPage.getPopularmovie();
+        String actualTest = movieDetailsPage.getpopularmovietitle();
+        String Expected = "Venom";
+        Assert.assertEquals(actualTest, Expected, "Venom");
+
+        String Actual = movieDetailsPage.getpopularoverview();
+        String expected = "nvestigative journalist Eddie Brock attempts a comeback following a scandal, but accidentally becomes the host of Venom, a violent, super powerful alien symbiote.";
+        Assert.assertEquals(Actual, expected, "nvestigative journalist Eddie Brock attempts a comeback following a scandal, but accidentally becomes the host of Venom, a violent, super powerful alien symbiote.");
+
+        String Actualsensor = movieDetailsPage.getpopularsensorrating();
+        String expectedsensor = "U/A";
+        Assert.assertEquals(Actualsensor, expectedsensor, "U/A");
+
+        String actuals = movieDetailsPage.getpopularwatchtime();
+        String expectedd = "2h 12m";
+        Assert.assertEquals(actuals, expectedd, "2h 12m");
+
+        String ActualYear = movieDetailsPage.getpopularreleseyear();
+        String expectedYear = "2021";
+        Assert.assertEquals(ActualYear, expectedYear, "2021");
+
+        movieDetailsPage.getpopularplaybutton();
+    }
+}
