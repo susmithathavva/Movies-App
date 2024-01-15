@@ -1,0 +1,119 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.FindBy;
+import java.time.Duration;
+import java.util.List;
+public class MovieDetailsPage {
+    WebDriver driver;
+    WebDriverWait wait;
+     @FindBy(xpath = "//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div[1]/div/a/div/img")
+    WebElement singlemovie;
+
+
+    By title=By.className("movie-title");
+
+    By sensorrating=By.className("sensor-rating");
+
+    By overview=By.className("movie-overview");
+
+    By watchtime=By.className("watch-time");
+
+    By releseyear=By.className("release-year");
+
+    @FindBy(className = "play-button")
+    WebElement playbutton;
+
+    @FindBy(xpath = "//*[@id=\"root\"]/div/nav/div[1]/ul/li[2]/a")
+    WebElement popular;
+
+    @FindBy(xpath = "//*[@id=\"root\"]/div/div[1]/li[1]/a/img")
+    WebElement popularmovie;
+
+    By popularmovietitle=By.className("movie-title");
+
+    By popularoverview=By.className("movie-overview");
+
+    By popularsensorrating=By.className("sensor-rating");
+
+    By popularwatchtime=By.className("watch-time");
+
+    By popularreleseyear=By.className("release-year");
+
+    @FindBy(className = "play-button")
+    WebElement popularplaybutton;
+
+
+    public MovieDetailsPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
+   public void getheading1(){
+        singlemovie.click();
+   }
+    public String gettitle(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("movie-title")));
+        return driver.findElement(title).getText();
+    }
+    public String getoverview(){
+        return driver.findElement(overview).getText();
+    }
+    public String getwatchtime(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("watch-time")));
+
+        return driver.findElement(watchtime).getText();
+    }
+
+    public String getsensorrating(){
+        return driver.findElement(sensorrating).getText();
+    }
+
+    public String getreleseyear(){
+        return driver.findElement(releseyear).getText();
+    }
+    public void getplaybutton() {
+        playbutton.click();
+    }
+
+    public void getpopular(){
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"root\"]/div/nav/div[1]/ul/li[2]/a")));
+        popular.click();
+    }
+
+    public void getPopularmovie(){
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"root\"]/div/div[1]/li[1]/a/img")));
+        popularmovie.click();
+    }
+
+    public String getpopularmovietitle(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("movie-title")));
+        return driver.findElement(popularmovietitle).getText();
+    }
+    public String getpopularoverview(){
+        return driver.findElement(popularoverview).getText();
+    }
+    public String getpopularsensorrating(){
+        return driver.findElement(popularsensorrating).getText();
+    }
+    public String getpopularwatchtime() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("watch-time")));
+
+        return driver.findElement(popularwatchtime).getText();
+
+    }
+    public String getpopularreleseyear(){
+            return driver.findElement(popularreleseyear).getText();
+        }
+
+    public void getpopularplaybutton() {
+        popularplaybutton.click();
+    }
+
+
+}
