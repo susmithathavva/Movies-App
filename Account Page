@@ -1,0 +1,77 @@
+package pages;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.FindBy;
+import java.time.Duration;
+import java.util.List;
+
+public class AccountPage {
+    WebDriver driver;
+    WebDriverWait wait;
+
+    @FindBy (xpath = "//*[@id=\"root\"]/div/div[1]/nav/div[2]/button[2]/img")
+    WebElement accountpagee;
+
+    By accountheading=By.className("account-heading");
+
+    //By membershipheading=By.className("membership-heading");
+
+    @FindBy(className ="membership-heading")
+    List<WebElement> membershipheading;
+
+    By membershipusername=By.className("membership-username");
+
+    By membershippassword=By.className("membership-password");
+
+    By planparagraph=By.className("plan-paragraph");
+
+    By plandetails=By.className("plan-details");
+
+    @FindBy(className = "logout-button")
+    WebElement logoutbutton;
+
+    public AccountPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
+        public void getaccountpage(){
+         accountpagee.click();
+        }
+    public String getaccountheading(){
+        //wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("")));
+        return driver.findElement(accountheading).getText();
+    }
+   // public String getmembershipheading(){
+
+     //   return driver.findElement(membershipheading).getText();
+
+    //}
+
+    public String getmembershipheading(int index)
+    {
+        return membershipheading.get(index).getText();
+    }
+    public String getmembershipusername(){
+        return driver.findElement(membershipusername).getText();
+    }
+    public String getmembershippassword(){
+        return driver.findElement(membershippassword).getText();
+    }
+
+    public String getplanparagraph(){
+        return driver.findElement(planparagraph).getText();
+    }
+
+    public String getplandetails(){
+        return driver.findElement(plandetails).getText();
+    }
+
+    public void getlogoutbutton() {
+        logoutbutton.click();
+    }
+}
