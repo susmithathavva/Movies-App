@@ -1,0 +1,73 @@
+package pages;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.FindBy;
+import java.time.Duration;
+import java.util.List;
+public class HomePage {
+    //@FindBy(className ="movies-list-heading")
+    //List<WebElement> trendingheading;
+
+    By heading=By.className("movies-list-heading");
+    By orginalgeading=By.className("movies-list-heading");
+    @FindBy(className = "home-movie-play-button")
+    WebElement playbutton;
+    @FindBy(className = "home-movie-details-container")
+    WebElement moviessection;
+    @FindBy(className = "contact-us-paragraph")
+    WebElement contactsection;
+    @FindBy(className = "website-logo")
+     WebElement logo;
+    @FindBy(linkText = "Home")
+      WebElement navbarhome;
+    @FindBy(linkText = "Popular")
+    WebElement navbarpopular;
+    @FindBy(className = "avatar-imgavatar-img")
+     WebElement navbaravathar;
+
+
+    WebDriver driver;
+    WebDriverWait wait;
+
+    public HomePage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
+       public String findheading(){
+
+        return driver.findElement(heading).getText();
+       }
+
+       public String findoriginalheading(){
+        return driver.findElement(orginalgeading).getText();
+       }
+
+       public WebElement findplaybutton(){
+        return playbutton;
+       }
+      public WebElement findmoviessection(){
+        return moviessection;
+      }
+      public WebElement findcontactsection(){
+        return contactsection;
+      }
+      public WebElement findlogo(){
+        return logo;
+      }
+      public WebElement findnavbar(){
+        return navbarhome;
+      }
+     public  WebElement findnavbarpopular(){
+        return navbarpopular;
+     }
+     public WebElement findnavbaravathar(){
+        return navbaravathar;
+     }
+}
+
+
