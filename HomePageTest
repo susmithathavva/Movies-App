@@ -1,0 +1,42 @@
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.loginpage;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeMethod;
+import java.time.Duration;
+
+public class HomePageTest {
+    loginpage loginpage;
+    HomePage homepage;
+    WebDriver driver;
+
+    @BeforeMethod
+    public void setup() {
+        System.setProperty("webdriver.chrome.driver","C:\\Users\\HP\\AppData\\Local\\Temp\\db1d160d-9511-41be-a6e5-bc155777136c_chromedriver-win32 (3).zip.36c\\chromedriver-win32\\chromedriver.exe");
+        driver=new ChromeDriver();
+        driver.get("https://qamoviesapp.ccbp.tech/");
+        homepage=new HomePage(driver);
+        loginpage=new loginpage(driver);
+        loginpage.loginToApplication("rahul", "rahul@2021");
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.urlToBe("https://qamoviesapp.ccbp.tech/"));
+    }
+   @Test
+public void testhomepage(){
+        //Assert.assertEquals(homepage.gettrendingheadings(1),"Trending Now");
+        String actualText=homepage.findheading();
+        String expected="Trending Now";
+        Assert.assertEquals(actualText,expected,"Heading text doesn't match");
+        String actual=homepage.findoriginalheading();
+        String expected1="Originals";
+       Assert.assertEquals(actual,expected,"Heading text doesn't match");
+      Assert.assertTrue(homepage.findplaybutton().isDisplayed());
+       Assert.assertTrue(homepage.findmoviessection().isDisplayed());
+       Assert.assertTrue(homepage.findcontactsection().isDisplayed());
+   }
+}
